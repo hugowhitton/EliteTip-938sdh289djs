@@ -140,7 +140,6 @@ app.use(morgan('dev'));
 
 // ✅ Database connection
 mongoose
-  .connect('mongodb+srv://hewgau:Embrun31@elitetip.mb61h.mongodb.net/?retryWrites=true&w=majority&appName=EliteTip')
   .then(() => console.log('MongoDB connected.'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
