@@ -1,0 +1,19 @@
+footer {
+    text-align: center;
+    margin: 2rem 0 1rem;
+    color: #b0b0b0;
+    font-size: 1rem;
+    opacity: 0.7;
+    z-index: -1;
+  }
+  
+  footer a {
+    color: #8e8e8e;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  
+  footer a:hover {
+    color: #ffffff;
+  }
+  

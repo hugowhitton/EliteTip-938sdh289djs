@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>EliteTip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+  <script src="https://js.stripe.com/v3"></script>
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+  </header>
+  <main class="tipping-card">
+    <h2>Tip Your Hotel Maid</h2>
+    <p>Enter your room number and tip amount below:</p>
+    <form action="/create-checkout-session" method="POST" class="tip-form">
+      <label>Room Number:</label>
+      <input type="text" name="roomNumber" id="roomNumber" required>
+      <label>Tip Amount (CAD):</label>
+      <input type="number" name="tipAmount" id="tipAmount" required min="1">
+      <button type="submit">Tip Now (Stripe Checkout)</button>
+    </form>
+    <h3>Or pay directly with Apple / Google Pay</h3>
+    <p>Just enter your tip info, then use the button below:</p>
+    <div id="payment-request-button"></div>
+    <p>
+      <a href="/staff/login">Staff Login</a> | 
+      <a href="/staff/signup">Staff Sign Up</a>
+    </p>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip | 
+    <a href="/disclaimer">Disclaimer</a>
+  </footer>
+  <script src="/scripts/index.js"></script>
+</body>
+</html>

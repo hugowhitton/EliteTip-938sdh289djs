@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>All Staff (Database View)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">EliteTip</a>
+    <div class="profile-dropdown">
+      <button class="profile-button">
+        <img alt="Profile" class="profile-avatar" src="data:image/svg+xml;utf8,<!-- svg content here -->">
+      </button>
+      <div class="dropdown-content">
+        <a href="/manager/edit-profile">Edit Profile</a>
+        <a href="/manager/logout">Logout</a>
+      </div>
+    </div>
+  </header>
+  <main class="manager-all-staff-container">
+    <h2>All Staff (Database View)</h2>
+    <table class="staff-table">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% allStaff.forEach((staff) => { %>
+          <tr>
+            <td class="tooltip-container">
+              <span><%= staff.fullName %></span>
+              <div class="tooltip-content">
+                <strong>Email:</strong> <%= staff.email %><br>
+                <strong>Employee #:</strong> <%= staff.employeeNumber %><br>
+                <strong>Role:</strong> <%= staff.role %>
+              </div>
+            </td>
+            <td><%= staff.phoneNumber %></td>
+            <td>
+              <% if (String(staff._id) === String(managerId)) { %>
+                (Yourself)
+              <% } else { %>
+                <a href="/manager/staff-edit?id=<%= staff._id %>" class="action-link">Edit</a> |
+                <a href="/manager/staff-delete?id=<%= staff._id %>" class="delete-link" onclick="return confirm('Are you sure you want to delete <%= staff.email %>?');">Delete</a>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <p><a href="/staff/dashboard" class="btn-back-dashboard">Back to Dashboard</a></p>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+  <script src="/scripts/managerAllStaff.js"></script>
+</body>
+</html>

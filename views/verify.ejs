@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Enter Verification Code</title>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+  <link rel="stylesheet" href="/verify.css">
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+  </header>
+  <main>
+    <h2>Verify Your Email</h2>
+    <p>We sent a 4-digit code to <%= defaultEmail %>. Please check your inbox and enter it below.</p>
+    <% if (typeof errorMsg !== 'undefined') { %>
+      <p class="error-message"><%= errorMsg %></p>
+    <% } %>
+    <form id="verifyForm" action="/staff/verify" method="POST">
+      <input type="hidden" name="email" value="<%= defaultEmail %>">
+      <input type="hidden" name="code" id="finalCode">
+      <div class="code-container">
+        <input type="text" class="digit-box" id="digit1" maxlength="1" pattern="[0-9]" required>
+        <input type="text" class="digit-box" id="digit2" maxlength="1" pattern="[0-9]" required>
+        <input type="text" class="digit-box" id="digit3" maxlength="1" pattern="[0-9]" required>
+        <input type="text" class="digit-box" id="digit4" maxlength="1" pattern="[0-9]" required>
+      </div>
+      <button type="submit" class="btn">Verify</button>
+    </form>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+  <script src="/scripts/verify.js"></script>
+</body>
+</html>

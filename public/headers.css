@@ -1,0 +1,19 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 10px 20px;
+  }
+  
+  header a {
+    font-family: 'Poppins', sans-serif;
+    color: inherit;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.25rem;
+    margin: 0 auto;
+  }
+  

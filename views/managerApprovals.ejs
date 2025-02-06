@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pending Approvals</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+    <div class="profile-dropdown">
+      <button class="profile-button">
+        <img alt="Profile" class="profile-avatar" src="data:image/svg+xml;utf8,<!-- svg content here -->">
+      </button>
+      <div class="dropdown-content">
+        <a href="/manager/edit-profile">Edit Profile</a>
+        <a href="/manager/logout">Logout</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <h2>Pending Tip Approvals</h2>
+    <% if (!pendingTips.length) { %>
+      <p>No pending approvals.</p>
+    <% } else { %>
+      <% pendingTips.forEach((tip) => { %>
+        <div class="pending-tip">
+          <p><strong>Room <%= tip.roomNumber %></strong></p>
+          <p>Amount: $<%= tip.amount.toFixed(2) %></p>
+          <p>Requested By: <%= tip.requestedBy %></p>
+          <a href="/manager/approve?id=<%= tip._id %>&decision=approve">Approve</a>
+          <a href="/manager/approve?id=<%= tip._id %>&decision=reject">Reject</a>
+        </div>
+      <% }) %>
+    <% } %>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+</body>
+</html>

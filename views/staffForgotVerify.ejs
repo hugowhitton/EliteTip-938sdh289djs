@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Enter Your Reset Code</title>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+  <!-- Code Input Styles -->
+  <link rel="stylesheet" href="/verify.css">
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+  </header>
+  <main class="container forgot-container">
+    <h2>Enter Your Reset Code</h2>
+    <% if (errorMsg) { %>
+      <p class="error-message"><%= errorMsg %></p>
+    <% } %>
+    <p>We sent a 4-digit code to <strong><%= email %></strong>. Enter it below:</p>
+    <form action="/staff/forgot-verify" method="POST" id="verifyForm" class="forgot-form">
+      <input type="hidden" name="code" id="finalCode">
+      <input type="hidden" name="email" value="<%= email %>">
+      <div class="code-container">
+        <input type="text" class="digit-box" id="digit1" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+        <input type="text" class="digit-box" id="digit2" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+        <input type="text" class="digit-box" id="digit3" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+        <input type="text" class="digit-box" id="digit4" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+      </div>
+      <button type="submit" class="btn">Verify Code</button>
+    </form>
+    <p class="back-link"><a href="/staff/login">Back to Login</a></p>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+  <script src="/scripts/staffForgotVerify.js"></script>
+</body>
+</html>

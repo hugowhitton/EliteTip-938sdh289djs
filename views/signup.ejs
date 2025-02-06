@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Staff Signup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+  <style>
+    /* Inline styles for password toggle */
+    .password-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .password-input-wrapper input {
+      flex: 1;
+      padding-right: 3rem; /* ensure space for the toggle icon */
+    }
+    .toggle-password-btn {
+      position: absolute;
+      right: 0.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+    }
+    .toggle-password-btn svg {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+  </header>
+  <main>
+    <h2>Create a Staff Account</h2>
+    <form action="/staff/signup" method="POST">
+      <label>First Name:</label>
+      <input type="text" name="firstName" value="<%= formData.firstName || '' %>" required>
+      <% if (errorMsgs.firstLastNameError) { %>
+        <p class="error-message"><%= errorMsgs.firstLastNameError %></p>
+      <% } %>
+
+      <label>Last Name:</label>
+      <input type="text" name="lastName" value="<%= formData.lastName || '' %>" required>
+      <% if (errorMsgs.firstLastNameError) { %>
+        <p class="error-message"><%= errorMsgs.firstLastNameError %></p>
+      <% } %>
+
+      <label>Email:</label>
+      <input type="email" name="email" value="<%= formData.email || '' %>" required>
+      <% if (errorMsgs.emailError) { %>
+        <p class="error-message"><%= errorMsgs.emailError %></p>
+      <% } %>
+
+      <div class="phone-input-wrapper">
+        <div>
+          <label for="countryCode">Country:</label>
+          <select name="countryCode" id="countryCode">
+            <option value="+1" selected>CA (+1)</option>
+            <option value="+1">US (+1)</option>
+            <option value="+44">UK (+44)</option>
+            <option value="+61">AU (+61)</option>
+            <option value="+91">IN (+91)</option>
+            <option value="+81">JP (+81)</option>
+            <option value="+49">DE (+49)</option>
+            <option value="+33">FR (+33)</option>
+            <option value="+39">IT (+39)</option>
+          </select>
+        </div>
+        <div>
+          <label for="phoneNumber">Phone Number:</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="123-456-7890" required>
+        </div>
+      </div>
+
+      <label>Employee Number:</label>
+      <input type="text" name="employeeNumber" value="<%= formData.employeeNumber || '' %>" required>
+      <% if (errorMsgs.employeeNumberError) { %>
+        <p class="error-message"><%= errorMsgs.employeeNumberError %></p>
+      <% } %>
+
+      <label>Password:</label>
+      <div class="password-input-wrapper">
+        <input type="password" name="password" id="signupPassword" required placeholder="Enter your password">
+        <button type="button" class="toggle-password-btn" data-target="signupPassword">
+          <!-- Default eye icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="#ccc" viewBox="0 0 24 24">
+            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.04 0-5.5-2.46-5.5-5.5S8.96 6.5 12 6.5s5.5 2.46 5.5 5.5S15.04 17.5 12 17.5z"/>
+          </svg>
+        </button>
+      </div>
+      <% if (errorMsgs.passwordError) { %>
+        <p class="error-message"><%= errorMsgs.passwordError %></p>
+      <% } %>
+
+      <label>Confirm Password:</label>
+      <div class="password-input-wrapper">
+        <input type="password" name="confirmPassword" id="signupConfirmPassword" required placeholder="Confirm your password">
+        <button type="button" class="toggle-password-btn" data-target="signupConfirmPassword">
+          <!-- Default eye icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="#ccc" viewBox="0 0 24 24">
+            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.04 0-5.5-2.46-5.5-5.5S8.96 6.5 12 6.5s5.5 2.46 5.5 5.5S15.04 17.5 12 17.5z"/>
+          </svg>
+        </button>
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+    <p><a href="/staff/login">Already have an account? Login</a></p>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+  <script src="/scripts/signup.js"></script>
+</body>
+</html>

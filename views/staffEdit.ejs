@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Info</title>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+  <link rel="stylesheet" href="/confirmModal.css">
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+    <div class="profile-dropdown">
+      <button class="profile-button">
+        <img alt="Profile" class="profile-avatar" src="<%= staff.profileImage && staff.profileImage !== 'undefined' ? staff.profileImage : 'data:image/svg+xml;utf8,<!-- default svg -->' %>">
+      </button>
+      <div class="dropdown-content">
+        <a href="/staff/edit">Edit Profile</a>
+        <a href="/staff/logout">Logout</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <h2>Edit Your Info</h2>
+    <form id="editForm" action="/staff/edit" method="POST" enctype="multipart/form-data" novalidate>
+      <label for="firstName">First Name:</label>
+      <input type="text" name="firstName" id="firstName" value="<%= staff.firstName %>" required>
+      <% if (typeof errorMsgs !== "undefined" && errorMsgs.firstNameError) { %>
+        <p class="error-message"><%= errorMsgs.firstNameError %></p>
+      <% } %>
+      <label for="lastName">Last Name:</label>
+      <input type="text" name="lastName" id="lastName" value="<%= staff.lastName %>" required>
+      <% if (typeof errorMsgs !== "undefined" && errorMsgs.lastNameError) { %>
+        <p class="error-message"><%= errorMsgs.lastNameError %></p>
+      <% } %>
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" value="<%= staff.email %>" required>
+      <% if (typeof errorMsgs !== "undefined" && errorMsgs.emailFormatError) { %>
+        <p class="error-message"><%= errorMsgs.emailFormatError %></p>
+      <% } %>
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" name="phoneNumber" id="phoneNumber" value="<%= staff.phoneNumber || '' %>" placeholder="123-456-7890" required pattern="\d{3}-\d{3}-\d{4}">
+      <% if (typeof errorMsgs !== "undefined" && errorMsgs.phoneNumberError) { %>
+        <p class="error-message"><%= errorMsgs.phoneNumberError %></p>
+      <% } %>
+      <input type="hidden" name="email" value="<%= user.email %>">
+
+      <div class="profile-picture-container">
+        <img id="profilePic" class="profile-picture" src="<%= staff.profileImage && staff.profileImage !== 'undefined' ? staff.profileImage : 'data:image/svg+xml;utf8,<!-- default svg -->' %>" alt="Profile Picture">
+        <label for="imageUpload" class="edit-photo-button">Edit Photo</label>
+        <input type="file" id="imageUpload" name="image" accept="image/*" style="display: none;">
+      </div>
+      <input type="hidden" id="profileImageUrl" name="profileImageUrl" value="<%= staff.profileImage || '' %>">
+      <button type="submit">Save Changes</button>
+    </form>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+  <div id="confirmModal">
+    <div class="confirm-title">Are you sure you want to save these changes?</div>
+    <div id="confirmMessage" class="confirm-changes"></div>
+    <div class="confirm-buttons">
+      <button id="confirmSubmit" class="btn-confirm">Confirm</button>
+      <button id="cancelSubmit" class="btn-cancel">Cancel</button>
+    </div>
+  </div>
+  <script src="/scripts/staffEdit.js"></script>
+  <div id="confirmModal">
+    <div class="confirm-title">Are you sure you want to save these changes?</div>
+    <div id="confirmMessage" class="confirm-changes"></div>
+    <div class="confirm-buttons">
+      <button id="confirmSubmit" class="btn-confirm">Confirm</button>
+      <button id="cancelSubmit" class="btn-cancel">Cancel</button>
+    </div>
+  </div>
+</body>
+</html>

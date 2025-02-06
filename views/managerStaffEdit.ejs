@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Manager Edit Staff</title>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+    <div class="profile-dropdown">
+      <button class="profile-button">
+        <img alt="Profile" class="profile-avatar" src="data:image/svg+xml;utf8,<!-- default svg -->">
+      </button>
+      <div class="dropdown-content">
+        <a href="/manager/edit-profile">Edit Profile</a>
+        <a href="/manager/logout">Logout</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <h2>Edit Staff User</h2>
+    <form method="POST" action="/manager/staff-edit">
+      <input type="hidden" name="staffId" value="<%= staff._id %>">
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" name="fullName" value="<%= staff.firstName %> <%= staff.lastName %>" required>
+      <% if (errorMsgs && errorMsgs.fullName) { %>
+        <p class="error-message"><%= errorMsgs.fullName %></p>
+      <% } %>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="<%= staff.email %>" required>
+      <% if (errorMsgs && errorMsgs.email) { %>
+        <p class="error-message"><%= errorMsgs.email %></p>
+      <% } %>
+      <label for="role">Role:</label>
+      <select id="role" name="role" required>
+        <option value="maid" <%= staff.role === 'maid' ? 'selected' : '' %>>Maid</option>
+        <option value="manager" <%= staff.role === 'manager' ? 'selected' : '' %>>Manager</option>
+      </select>
+      <label for="countryCode">Country Code:</label>
+      <div class="country-phone">
+        <input type="text" id="countryCode" name="countryCode" value="<%= staff.countryCode || '+1' %>" placeholder="+1" required>
+        <input type="text" id="phoneNumber" name="phoneNumber" value="<%= staff.phoneNumber %>" placeholder="xxx-xxx-xxxx" required>
+      </div>
+      <% if (errorMsgs && errorMsgs.countryCode) { %>
+        <p class="error-message"><%= errorMsgs.countryCode %></p>
+      <% } %>
+      <% if (errorMsgs && errorMsgs.phoneNumber) { %>
+        <p class="error-message"><%= errorMsgs.phoneNumber %></p>
+      <% } %>
+      <button type="submit">Save</button>
+      <a href="/manager/staff-list">Cancel</a>
+    </form>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+  <script src="/scripts/managerStaffEdit.js"></script>
+</body>
+</html>

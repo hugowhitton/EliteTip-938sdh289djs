@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Manager Signup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+  </header>
+  <main>
+    <h2>Create a Manager Account</h2>
+    <form action="/manager/signup?code=SUPERSECRET123" method="POST">
+      <label>First Name:</label>
+      <input type="text" name="firstName" value="<%= formData.firstName || '' %>" required>
+      <% if (errorMsgs.firstLastNameError) { %>
+        <p class="error-message"><%= errorMsgs.firstLastNameError %></p>
+      <% } %>
+      <label>Last Name:</label>
+      <input type="text" name="lastName" value="<%= formData.lastName || '' %>" required>
+      <% if (errorMsgs.firstLastNameError) { %>
+        <p class="error-message"><%= errorMsgs.firstLastNameError %></p>
+      <% } %>
+      <label>Email:</label>
+      <input type="email" name="email" value="<%= formData.email || '' %>" required>
+      <% if (errorMsgs.emailError) { %>
+        <p class="error-message"><%= errorMsgs.emailError %></p>
+      <% } %>
+      <label for="countryCode">Country:</label>
+      <select id="countryCode" name="countryCode" required>
+        <option value="+1" selected>Canada (+1)</option>
+        <option value="+44">United Kingdom (+44)</option>
+        <option value="+61">Australia (+61)</option>
+        <option value="+91">India (+91)</option>
+      </select>
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="e.g., 123-456-7890" pattern="\d{3}-\d{3}-\d{4}" required title="Phone number must follow the format 123-456-7890">
+      <% if (errorMsgs?.phoneNumberFormatError) { %>
+        <p class="error-message"><%= errorMsgs.phoneNumberFormatError %></p>
+      <% } %>
+      <label>Employee Number:</label>
+      <input type="text" name="employeeNumber" value="<%= formData.employeeNumber || '' %>" required>
+      <% if (errorMsgs.employeeNumberError) { %>
+        <p class="error-message"><%= errorMsgs.employeeNumberError %></p>
+      <% } %>
+      <label>Password:</label>
+      <input type="password" name="password" required>
+      <% if (errorMsgs.passwordError) { %>
+        <p class="error-message"><%= errorMsgs.passwordError %></p>
+      <% } %>
+      <label>Confirm Password:</label>
+      <input type="password" name="confirmPassword" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p><a href="/staff/login">Already have an account? Login</a></p>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+  <script src="/scripts/signup.js"></script>
+</body>
+</html>

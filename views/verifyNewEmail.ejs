@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Verify New Email</title>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+  <link rel="stylesheet" href="/verify.css">
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+  </header>
+  <main>
+    <h2>Verify Your New Email</h2>
+    <% if (errorMsg) { %>
+      <p class="error-message"><%= errorMsg %></p>
+    <% } %>
+    <form action="/staff/verify-new-email" method="POST">
+      <input type="hidden" name="code" id="finalCode">
+      <p>We sent a 4-digit code to your new email. Enter it below.</p>
+      <div class="code-container">
+        <input id="digit1" class="digit-box" type="text" maxlength="1" pattern="[0-9]" required>
+        <input id="digit2" class="digit-box" type="text" maxlength="1" pattern="[0-9]" required>
+        <input id="digit3" class="digit-box" type="text" maxlength="1" pattern="[0-9]" required>
+        <input id="digit4" class="digit-box" type="text" maxlength="1" pattern="[0-9]" required>
+      </div>
+      <button type="submit" class="btn">Verify</button>
+    </form>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+  <script src="/public/scripts/verifyNewEmail.js"></script>
+</body>
+</html>

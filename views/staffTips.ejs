@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Unclaimed Tips (Staff View)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/headers.css">
+  <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+  <header>
+    <a href="/">EliteTip</a>
+    <div class="profile-dropdown">
+      <button class="profile-button">
+        <img alt="Profile" class="profile-avatar" src="data:image/svg+xml;utf8,<!-- svg content here -->">
+      </button>
+      <div class="dropdown-content">
+        <a href="/staff/edit">Edit Profile</a>
+        <a href="/staff/logout">Logout</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <h2>Unclaimed Tips (Staff View)</h2>
+    <% 
+      let foundAnyUnclaimed = false;
+      for (let room in tipsDB) { 
+        let totalUnclaimed = 0;
+        let unclaimedCount = 0;
+        tipsDB[room].forEach(t => {
+          if (!t.claimed && !t.approvalRequested && !t.approved && !t.tipRejected) {
+            totalUnclaimed += t.amount;
+            unclaimedCount++;
+          }
+        });
+        if (unclaimedCount > 0) {
+          foundAnyUnclaimed = true;
+    %>
+          <div class="unclaimed-tip">
+            <p><strong>Room <%= room %></strong></p>
+            <p>Unclaimed Total: $<%= totalUnclaimed.toFixed(2) %></p>
+            <% if (role === 'maid') { %>
+              <a href="/staff/claim?room=<%= room %>">Claim</a>
+            <% } %>
+          </div>
+    <% 
+        }
+      } 
+      if (!foundAnyUnclaimed) { 
+    %>
+      <p>No unclaimed tips.</p>
+    <% } %>
+    <p><a href="/staff/dashboard">Back to Dashboard</a></p>
+  </main>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> EliteTip
+  </footer>
+</body>
+</html>
